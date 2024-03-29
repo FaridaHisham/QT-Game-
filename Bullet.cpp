@@ -4,12 +4,13 @@
 #include <QList>
 #include "Enemy.h"
 #include "Game.h"
+#include <QDebug>
 
 extern Game * game; // there is an external global object called game
 
 Bullet::Bullet(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
 
-    QPixmap p("C:/Usersmo/Documents/QtGame/Red_laser.png");
+    QPixmap p(":/images/Red_laser.png");
     p = p.scaledToWidth(50);
     p = p.scaledToHeight(50);
     setPixmap(p);
@@ -20,7 +21,8 @@ Bullet::Bullet(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
     setPos(random_number,0);
 
     // draw graphics
-    setPixmap(QPixmap(":/Documents/QtGame/Red_laser.png"));
+    setPixmap(p);
+    this->show();
 
 
     // make/connect a timer to move() the bullet every so often
@@ -39,6 +41,7 @@ void Bullet::move(){
     for (int i = 0, n = colliding_items.size(); i < n; ++i){
         if (typeid(*(colliding_items[i])) == typeid(Enemy)){
             // increase the score
+            qDebug() << "test";
             game->score->increase();
 
             // remove them from the scene (still on the heap)
