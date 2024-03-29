@@ -4,22 +4,14 @@
 #include <QList>
 #include <stdlib.h> // rand() -> really large int
 #include "Game.h"
-
-
-//  ui->setupUi(this);
-
-/*QPixmap pix ("C:\\Users\\mo\\Documents\\Assignment1\\Cinema.jpg.jfif");
-int w = ui ->image2_label->width();
-int h = ui ->image2_label->height();
-ui->image2_label->setPixmap(pix.scaled(w,h, Qt::KeepAspectRatio));*/
-
-
+#include <Health.h>
+#include <gameover.h>
 
 extern Game * game;
 
 Enemy::Enemy(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
 
-    QPixmap p("C:/Users/mo/Documents/QtGame/enemies.png");
+    QPixmap p(":/images/enemies.png");
     p = p.scaledToWidth(75);
     p = p.scaledToHeight(75);
     setPixmap(p);
@@ -48,8 +40,20 @@ void Enemy::move(){
 
     // destroy enemy when it goes out of the screen
     if (pos().y() > 600){
+
         //decrease the health
         game->health->decrease();
+        //condition for terminating game
+        if(game->health->health== 0)
+        {
+            game->close();
+            Gameover *over = new Gameover();
+            over->show();
+
+
+            //game over
+            //close current scene and create a new one *game over*
+        }
 
         scene()->removeItem(this);
         delete this;
