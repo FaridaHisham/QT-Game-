@@ -7,6 +7,8 @@
 #include <QBrush>
 #include <QImage>
 #include "Player.h"
+
+
 Game::Game(QWidget *parent){
     // create the scene
     scene = new QGraphicsScene();
@@ -17,8 +19,8 @@ Game::Game(QWidget *parent){
 
     // make the newly created scene the scene to visualize (since Game is a QGraphicsView Widget,
     // it can be used to visualize scenes)
-
-
+    int temp = 3;
+    healthind = &temp;
     setScene(scene);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -28,7 +30,7 @@ Game::Game(QWidget *parent){
 
 
     player = new Player();
-    player->setPos(400,300); // TODO generalize to always be in the middle bottom of screen
+    player->setPos(400,500); // TODO generalize to always be in the middle bottom of screen
     // make the player focusable and set it to be the current focus
 
 
@@ -44,7 +46,7 @@ Game::Game(QWidget *parent){
 
     score = new Score();
     scene->addItem(score);
-    health = new Health();
+    health = new Health(*healthind);
     health->setPos(health->x(),health->y()+25);
     scene->addItem(health);
 
@@ -54,10 +56,7 @@ Game::Game(QWidget *parent){
     QObject::connect(timer,SIGNAL(timeout()),player,SLOT(spawn()));
     timer->start(2000);
 
-    play background music;
-     QMediaPlayer * music = new QMediaPlayer();
-     music->setMedia(QUrl("qrc:/sounds/bgsound.mp3"));
-     music->play();
 
-     show();
+
+
 }
