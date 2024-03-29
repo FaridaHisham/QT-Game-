@@ -12,7 +12,7 @@ Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent){
     // bulletsound->setMedia(QUrl("qrc:/sounds/bullet.wav"));*/
 
 
-    QPixmap p("C:/Users/mo/Documents/QtGame/player.png.png");
+    QPixmap p(":/images/player.png");
     p = p.scaledToWidth(100);
     p = p.scaledToHeight(100);
 
@@ -33,6 +33,7 @@ void Player::keyPressEvent(QKeyEvent *event){
     }
     // shoot with the spacebar
     else if (event->key() == Qt::Key_Space){
+
         // create a bullet
         Bullet * bullet = new Bullet();
         bullet->setPos(x()+45,y());

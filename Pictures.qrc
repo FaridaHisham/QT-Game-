@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>Red_laser.png</file>
+        <file>enemies.png</file>
+        <file>player.png</file>
+    </qresource>
+</RCC>
